@@ -10,7 +10,7 @@
 <ion-content class="getting-started homestay">
   <ion-item-divider primary *ngIf="group && !group.hasPic">
     <ion-row>
-      <ion-col>Please take a picture with your students</ion-col>
+      <ion-col>Snapshot fun moments with students anytime</ion-col>
     </ion-row>
   </ion-item-divider>
   <div *ngIf="group.guests && group.guests.length">
@@ -23,7 +23,7 @@
               <ion-avatar item-left *ngIf="!guest || !guest._id || !guest._id.photo || !guest._id.photo.length" [ngStyle]="{'background-image': 'url(./img/default.png)'}"></ion-avatar>
             </button>
           </div>
-          <ion-col *ngIf="guest._id" text-center class="name">{{guest._id.pinyin}} &nbsp;&nbsp;{{guest._id.age}} <ion-icon *ngIf="guest._id.gender == 2" name="female" small></ion-icon><ion-icon *ngIf="guest._id.gender == 1" name="male" small></ion-icon></ion-col>
+          <ion-col *ngIf="guest._id" text-center class="name">{{guest._id.pinyin}} &nbsp;&nbsp;<span class="grey">{{guest._id.age}}</span> <ion-icon class="grey" *ngIf="guest._id.gender == 2" name="female" small></ion-icon><ion-icon *ngIf="guest._id.gender == 1" name="male" small></ion-icon></ion-col>
         </ion-row>
         <ion-row>
           <ion-col width-25>

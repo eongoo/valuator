@@ -20,6 +20,9 @@
     margin-left: calc(50% - 384px);
   }
 }
+.grey {
+  color:#b9b9b9;
+}
 .opaque {
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
@@ -100,9 +103,6 @@ ion-icon[small] {
   button[dashed] {
     border: 1px dashed;
     padding: 0 .8rem;
-  }
-  ion-item-divider {
-    padding: 6px 16px 7px 16px;
   }
 
   ion-item-divider[primary] {
