@@ -1,0 +1,42 @@
+<ion-navbar *navbar>
+  <ion-title>Group Feedback</ion-title>
+</ion-navbar>
+
+<ion-content class="upload-photo getting-started">
+  <ion-item-group>
+      <ion-item>
+        <ion-textarea #input [(ngModel)]="group.comment" placeholder="Please write down your feedback to the group" (keyup)="handleInput(input)" (enter)="handleInput(input)" (blur)="handleInput(input)"></ion-textarea>
+      </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-row padding>
+      <ion-col width-33 *ngFor="let photo of group.pics; let i = index">
+        <div class="photo" [ngClass]="photo._id ? '' : 'uploader-status'"  [ngStyle]="{'background-image': 'url(' + photo.path + ')'}">
+          <ion-spinner *ngIf="!photo._id" name="bubbles"></ion-spinner>
+        </div>
+        <button clear danger (click)="removePhoto(i)">
+          <ion-icon name="close-circle"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col width-33 center *ngIf="group.pics.length < maxCount">
+        <div class="add-photo">
+          <div class="add-photo-icon">
+            <div text-center>
+              <ion-icon name="images" gray></ion-icon>
+            </div>
+            <div text-center><span gray>Add photos</span></div>
+          </div>
+        </div>
+        <input type="file" id="file-input" #input (change)="addPhoto(input)" multiple="">
+      </ion-col>
+    </ion-row>
+  </ion-item-group>
+  <div padding>
+    <button primary block (click)="openSignPage($event)">
+      <span *ngIf="!group.pics.length && !group.comment">Skip</span>
+      <span *ngIf="group.status < 3 && (group.pics.length || group.comment)">Next</span>
+      <span *ngIf="group.status ==3 && (group.pics.length || group.comment)">Complete</span>
+    </button>
+  </div>
+  <div padding></div>
+</ion-content>

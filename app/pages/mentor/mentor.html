@@ -1,0 +1,97 @@
+<ion-navbar *navbar>
+  <ion-title>Team Members</ion-title>
+  <ion-buttons end>
+    <button (click)="logout()">Logout</button>
+  </ion-buttons>
+</ion-navbar>
+
+
+<ion-content class="getting-started mentor-page">
+  <ion-item-divider primary *ngIf="!group.pics || !group.pics.length">
+    <ion-row>
+      <ion-col>Please take a picture with your students</ion-col>
+    </ion-row>
+  </ion-item-divider>
+  <ion-item-group *ngIf="group.guests && group.guests.length">
+    <ion-item-divider light>
+      <ion-row center>
+        <ion-col width-33 text-center>
+          <span primary *ngIf="group.count">Evaluation ({{group.count.score + group.count.absent}}/{{group.count.guest}})</span>
+        </ion-col>
+        <ion-col width-33 text-center>
+          <span primary>Comments</span>
+        </ion-col>
+        <ion-col width-33 text-center>
+          <span primary>Signature</span>
+        </ion-col>
+      </ion-row>
+      <ion-row center>
+        <ion-col width-33 text-center>
+          <ion-icon name="radio-button-on" [attr.primary]="(group.count.score + group.count.absent) ? '': null" [attr.gray]="(group.count.score + group.count.absent) ? null : ''"></ion-icon>
+        </ion-col>
+        <ion-col width-33 text-center>
+          <ion-icon name="radio-button-on" [attr.primary]="group.status >= 2 ? '' : null" [attr.gray]="group.status >= 2 ? null : ''"></ion-icon>
+        </ion-col>
+        <ion-col width-33 text-center>
+          <ion-icon name="radio-button-on" [attr.primary]="group.status == 3 ? '' : null" [attr.gray]="group.status == 3 ? null : ''"></ion-icon>
+        </ion-col>
+        <div class="process-bg"></div>
+        <div class="process" *ngIf="group.status == 0 && group.count" [style.width.%]="(100 * (group.count.score + group.count.absent)/ group.count.guest)/3"></div>
+        <div class="process" *ngIf="group.status == 2" [style.width.%]="50"></div>
+        <div class="process" *ngIf="group.status == 3" [style.width.%]="66.666667"></div>
+      </ion-row>
+    </ion-item-divider>
+    <ion-grid>
+      <ion-row center *ngFor="let guest of group.guests">
+        <ion-col [attr.width-50]="guest.status == 0 ? '' : null" [attr.width-75]="guest.status != 0 ? '' : null">
+          <ion-row center>
+            <button clear gray (click)="previewAvatar(guest)">
+              <ion-avatar item-left *ngIf="guest && guest._id && guest._id.photo && guest._id.photo.length" [ngStyle]="{'background-image': 'url(' + guest._id.photo[0] + ')'}"></ion-avatar>
+              <ion-avatar item-left *ngIf="!guest || !guest._id || !guest._id.photo || !guest._id.photo.length" [ngStyle]="{'background-image': 'url(./img/default.png)'}"></ion-avatar>
+            </button>
+            <ion-col>
+              <ion-row *ngIf="guest._id"><span class="name">{{guest._id.pinyin}}</span></ion-row>
+              <ion-row *ngIf="guest.status > 0"><span primary>Evaluated</span></ion-row>
+              <ion-row *ngIf="guest.status < 0"><span danger>Absent</span></ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col width-25 *ngIf="guest.status == 0">
+          <button small block outline danger (click)="doAbsent(guest)" *ngIf="guest.status == 0">
+            <!-- <ion-icon name="eye-off"></ion-icon>-->
+            Absent 
+          </button>
+        </ion-col>
+        <ion-col width-25>
+          <button small block outline (click)="openEvaluateDetailsPage(guest)">
+            <!--<ion-icon name="create"></ion-icon>-->
+            <span *ngIf="guest.status <= 0">Evaluate</span>
+            <span *ngIf="guest.status > 0">Review</span>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-group>
+  <ion-grid></ion-grid>
+  <ion-item-group *ngIf="group.count && group.count.absent + group.count.score == group.count.guest">
+    <ion-grid>
+      <ion-row center>
+        <ion-col width-50>
+            <ion-row><span>Group Feedback</span></ion-row>
+            <ion-row *ngIf="group.status"><span primary>Evaluated</span></ion-row>
+        </ion-col>
+        <ion-col width-25>
+        </ion-col>
+        <ion-col width-25>
+          <button small block outline (click)="openEvaluateGroupPage()">
+            <!--<ion-icon name="create"></ion-icon>-->
+            <span *ngIf="!group.status">Evaluate</span>
+            <span *ngIf="group.status">Review</span>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-group>
+  <div padding></div>
+  <div padding></div>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-navbar *navbar>
+  <ion-title>Student Evaluation</ion-title>
+</ion-navbar>
+
+<ion-content padding class="cards-bg login">
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        We cordially invite you to complete this survey (1 min).It aims to reveal our students’ performance so as to build their digital learning portfolio.  Thank you!
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row center>
+      <ion-col text-center>Please enter your code</ion-col>
+    </ion-row>
+    <ion-row class="login-code">
+      <input pattern="[0-9]*" type="text" maxlength="6" class="stealth" #codeInput [(ngModel)]="loginCode" (input)="handleCodeInput(codeInput)" (keyup)="handleCodeInput(codeInput)" (enter)="handleCodeInput(codeInput)" (blur)="handleCodeInput(codeInput)">
+      <ion-col>
+        <input pattern="[0-9]*" type="text" maxlength="1" readonly text-center #codeInput1 [(ngModel)]="loginCode1">
+      </ion-col>
+      <ion-col>
+        <input pattern="[0-9]*" type="text" maxlength="1" readonly text-center #codeInput2 [(ngModel)]="loginCode2">
+      </ion-col>
+      <ion-col>
+        <input pattern="[0-9]*" type="text" maxlength="1" readonly text-center #codeInput3 [(ngModel)]="loginCode3">
+      </ion-col>
+      <ion-col>
+        <input pattern="[0-9]*" type="text" maxlength="1" readonly text-center #codeInput4 [(ngModel)]="loginCode4">
+      </ion-col>
+      <ion-col>
+        <input pattern="[0-9]*" type="text" maxlength="1" readonly text-center #codeInput5 [(ngModel)]="loginCode5">
+      </ion-col>
+      <ion-col>
+        <input pattern="[0-9]*" type="text" maxlength="1" readonly text-center #codeInput6 [(ngModel)]="loginCode6">
+      </ion-col>
+    </ion-row>
+    <ion-row class="member-name">
+      <ion-col width-50>
+        <input type="text" text-center class="text-input" [(ngModel)]="lastName" placeholder="Surname">
+      </ion-col>
+      <ion-col width-50>
+        <input type="text" text-center class="text-input" [(ngModel)]="firstName" placeholder="Given Name">
+      </ion-col>
+    </ion-row>
+    <ion-row></ion-row>
+    <ion-row>
+      <button block *ngIf="loginCodeCorrect && firstName && lastName" primary (click)="login()">Start</button>
+      <button block *ngIf="!loginCodeCorrect || !firstName || !lastName" gray (click)="login()">Start</button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

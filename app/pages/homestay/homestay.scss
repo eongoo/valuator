@@ -1,0 +1,52 @@
+.homestay {
+  div.avatar{
+    position: absolute;
+    top: -4rem;
+    left: 0;
+    width: 100%;
+  }
+  div.avatar button {
+    height: 6.5rem;
+  }
+  ion-item-divider[primary] ion-row {
+    border-bottom: none!important;
+  }
+  ion-col button {
+    width: 100%;
+  }
+  .button-small {
+    height: 4rem;
+    padding: 0;
+  }
+  ion-grid{
+    margin-top: 4.5rem;
+    padding: 5px !important;
+  }
+  ion-row{
+    position: relative;
+  }
+  ion-col.name {
+    padding-top: 3.2rem;
+  }
+  ion-avatar {
+    min-width: 6rem;
+    min-height: 6rem;
+  }
+  ion-avatar img{
+    max-width: 6rem;
+    max-height: 6rem;
+    border-radius: 6rem;
+  }
+  div.process-bg{
+    width: 75%;
+    left: 12.5%;
+  }
+  div.process{
+    left: 12.5%;
+  }
+  button[disabled]{
+    color: color($colors, gray, contrast);
+    border-color: color($colors, gray, contrast);
+    opacity: 1;
+  }
+}

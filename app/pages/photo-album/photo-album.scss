@@ -1,0 +1,13 @@
+.photo-album{
+  ion-col div.add-photo {
+    border: 1px dashed lighten($text-color, 30%);
+  }
+
+  ion-col div.add-photo span{
+    color: lighten($text-color, 30%);
+  }
+
+  ion-col div.add-photo ion-icon{
+    color: lighten($text-color, 30%);
+  }
+}

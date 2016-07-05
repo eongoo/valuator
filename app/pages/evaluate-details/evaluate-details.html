@@ -1,0 +1,65 @@
+<ion-navbar *navbar>
+  <ion-title *ngIf="isHomestay">Arrival Feedback</ion-title>
+  <ion-title *ngIf="isMentor">Evaluation form</ion-title>
+</ion-navbar>
+
+<ion-content class="evaluate-details getting-started">
+    <ion-row padding>
+      <ion-col text-center>
+        <button clear gray (click)="previewAvatar(guest)">
+            <ion-avatar *ngIf="guest && guest._id && guest._id.photo && guest._id.photo.length" [ngStyle]="{'background-image': 'url(' + guest._id.photo[0] + ')'}"></ion-avatar>
+            <ion-avatar *ngIf="!guest || !guest._id || !guest._id.photo || !guest._id.photo.length" [ngStyle]="{'background-image': 'url(./img/default.png)'}"></ion-avatar>
+            <div class="name" *ngIf="guest && guest._id">{{guest._id.pinyin}}</div>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-item-group *ngIf="response && response.diy_model && response.diy_model.model && response.diy_model.model.length">
+      <ion-item-group *ngFor="let model of response.diy_model.model">
+        <ion-item-divider *ngIf="model._tp == 'section'">
+          <ion-row>
+            <ion-col>{{model.title}}</ion-col>
+          </ion-row>
+        </ion-item-divider>
+        <ion-list inset *ngIf="model._tp == 'star'">
+            <ion-item>
+              <div>{{model.title}}</div>
+              <div text-center padding>
+                <button clear *ngFor="let star of ['1','2','3','4','5']" (click)="setStar(model.name, star)">
+                  <ion-icon *ngIf="response.data[model.name] >= star" name="star" primary></ion-icon>
+                  <ion-icon *ngIf="response.data[model.name] < star" name="star" light></ion-icon>
+                  <ion-icon *ngIf="!response.data[model.name]" name="star" light></ion-icon>
+                </button>
+              </div>
+              <div text-right *ngIf="score && score.data">
+                Arrival Feedback <ion-icon *ngFor="let star of ['1','2','3','4','5']" name="star" [attr.light]="score.data[model.name] < star ? '' : null" [attr.primary]="score.data[model.name] >= star ? '' : null"></ion-icon>
+              </div>
+            </ion-item>
+        </ion-list>
+        <ion-list inset *ngIf="model._tp == 'textarea'">
+          <ion-item>
+            <ion-textarea [(ngModel)]="response.data[model.name]" placeholder="{{model.placeholder}}" #input (keyup)="handleInput(model.name, input)" (enter)="handleInput(model.name, input)" (blur)="handleInput(model.name, input)"></ion-textarea>
+          </ion-item>
+        </ion-list>
+      </ion-item-group>
+    </ion-item-group>
+    <ion-grid *ngIf="error">
+      <ion-row>
+        <ion-col text-center>
+          <span danger>
+            <ion-icon name='ios-information-circle-outline' danger></ion-icon>
+            Load failed, please tray again later.
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div padding>
+      <button *ngIf="isMentor" [attr.disabled] = "allFilled ? null: ''" primary block (click)="submitEvaluate()">
+        <span *ngIf="isTheLastGuestToRate">Next</span>
+        <span *ngIf="!isTheLastGuestToRate">Complete</span>
+      </button>
+      <button *ngIf="isHomestay" [attr.disabled] = "allFilled ? null: ''" primary block (click)="submitEvaluate()">
+        <span *ngIf="guest.step > 0 && guest.step != 5">Next</span>
+        <span *ngIf="guest.step == 0 || guest.step == 5">Complete</span>
+      </button>
+    </div>
+</ion-content>

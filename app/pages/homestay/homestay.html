@@ -1,0 +1,63 @@
+<ion-navbar *navbar>
+  <ion-title>Homestay</ion-title>
+  <ion-buttons end>
+    <button (click)="logout()">Logout</button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content class="getting-started homestay">
+  <ion-item-divider primary *ngIf="group && !group.hasPic">
+    <ion-row>
+      <ion-col>Please take a picture with your students</ion-col>
+    </ion-row>
+  </ion-item-divider>
+  <div *ngIf="group.guests && group.guests.length">
+    <ion-item-group *ngFor="let guest of group.guests">
+      <ion-grid>
+        <ion-row>
+          <div class="avatar" text-center>
+            <button clear gray (click)="previewAvatar(guest)">
+              <ion-avatar item-left *ngIf="guest && guest._id && guest._id.photo && guest._id.photo.length" [ngStyle]="{'background-image': 'url(' + guest._id.photo[0] + ')'}"></ion-avatar>
+              <ion-avatar item-left *ngIf="!guest || !guest._id || !guest._id.photo || !guest._id.photo.length" [ngStyle]="{'background-image': 'url(./img/default.png)'}"></ion-avatar>
+            </button>
+          </div>
+          <ion-col *ngIf="guest._id" text-center class="name">{{guest._id.pinyin}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col width-25>
+            <button small [outline]="guest.step > 0" (click)="openEvaluateDetailsPage(guest)">Arrival<br/>Feedback</button>
+          </ion-col>
+          <ion-col width-25>
+            <button small [outline]="guest.step != 1" [disabled]="guest.step < 1"  (click)="openDepartureFeedbackPage(guest)">Departure<br/>Feedback</button>
+          </ion-col>
+          <ion-col width-25>
+            <button small [outline]="guest.step != 2" [disabled]="guest.step < 2"  (click)="openPhotoAlbumPage(guest)">Photos</button>
+          </ion-col>
+          <ion-col width-25>
+            <button small [outline]="guest.step != 3" [disabled]="guest.step < 3"  (click)="openGuestCommentPage(guest)">Comments</button>
+          </ion-col>
+        </ion-row>
+        <ion-row center>
+          <ion-col width-25 text-center>
+            <ion-icon name="radio-button-on" [attr.gray]="guest.step >= 0 ? null : ''" [attr.primary]="guest.step >= 0 ? '' : null"></ion-icon>
+          </ion-col>
+          <ion-col width-25 text-center>
+            <ion-icon name="radio-button-on" [attr.gray]="guest.step > 1 ? null : ''" [attr.primary]="guest.step > 1 ? '' : null"></ion-icon>
+          </ion-col>
+          <ion-col width-25 text-center>
+            <ion-icon name="radio-button-on" [attr.gray]="guest.step > 2 ? null : ''" [attr.primary]="guest.step > 2 ? '' : null"></ion-icon>
+          </ion-col>
+          <ion-col width-25 text-center>
+            <ion-icon name="radio-button-on" [attr.gray]="guest.step > 3 ? null : ''" [attr.primary]="guest.step > 3 ? '' : null"></ion-icon>
+          </ion-col>
+          <div class="process-bg"></div>
+          <div class="process" *ngIf="guest.step == 0" [style.width.%]="2"></div>
+          <div class="process" *ngIf="guest.step > 0 && guest.step < 4" [style.width.%]="12.5 + 25 * (guest.step -1)"></div>
+          <div class="process" *ngIf="guest.step >= 4" [style.width.%]="75"></div>
+        </ion-row>
+      </ion-grid>
+    </ion-item-group>
+  </div>
+  <ion-row padding></ion-row>
+  <ion-row padding></ion-row>
+</ion-content>

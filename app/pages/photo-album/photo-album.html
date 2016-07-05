@@ -1,0 +1,39 @@
+<ion-navbar *navbar>
+  <ion-title>Photos</ion-title>
+</ion-navbar>
+
+<ion-content class="photo-album upload-photo getting-started">
+  <ion-row padding>
+    <ion-col width-33 *ngFor="let photo of guest.pics; let i = index">
+      <div class="photo" [ngClass]="photo._id ? '' : 'uploader-status'"  [ngStyle]="{'background-image': 'url(' + photo.path + ')'}">
+        <ion-spinner *ngIf="!photo._id" name="bubbles"></ion-spinner>
+      </div>
+      <button clear danger (click)="removePhoto(i)">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col width-33 center *ngIf="guest.pics.length < maxCount">
+      <div class="add-photo">
+        <div class="add-photo-icon">
+          <div text-center>
+            <ion-icon name="images"></ion-icon>
+          </div>
+          <div text-center><span>Add photos</span></div>
+        </div>
+      </div>
+      <input type="file" id="file-input" #input (change)="addPhoto(input)" multiple="">
+    </ion-col>
+  </ion-row>
+  <ion-item-group>
+      <ion-item>
+        <ion-textarea #input [(ngModel)]="guest.pics_comment" placeholder="Please describe these moments" (keyup)="handleInput(input)" (enter)="handleInput(input)" (blur)="handleInput(input)"></ion-textarea>
+      </ion-item>
+  </ion-item-group>
+  <div padding>
+    <button primary block (click)="submitPhotoAlbum($event)" [disabled] = "!guest.pics.length || !guest.pics_comment">
+      <span *ngIf="guest.step == 5">Complete</span>
+      <span *ngIf="guest.step != 5">Next</span>
+    </button>
+  </div>
+  <div padding></div>
+</ion-content>

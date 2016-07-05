@@ -1,0 +1,41 @@
+.evaluate-details {
+  ion-row.info {
+    background: color($colors, light, contrast);
+  }
+  button ion-icon {
+    font-size: 4rem;
+  }
+  ion-item button {
+    height: 35px;
+  }
+  ion-label {
+    white-space: normal;
+  }
+  ion-col button {
+    width: 100%;
+    height: 9rem;
+  }
+  button .button-inner {
+    -webkit-flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+  }
+  button .name {
+    width: 100%;
+    color: #666;
+    padding-top: .5rem;
+    white-space: nowrap;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+  }
+  ion-avatar {
+    min-width: 6rem;
+    min-height: 6rem;
+    background-size: cover;
+  }
+  ion-avatar img{
+    max-width: 6rem;
+    max-height: 6rem;
+    border-radius: 6rem;
+  }
+}

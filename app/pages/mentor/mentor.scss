@@ -1,0 +1,30 @@
+.mentor-page{
+  ion-item-divider[primary] ion-row {
+    border-bottom: none!important;
+  }
+  ion-row {
+    position: relative;
+  }
+  ion-col button{
+    height: 3rem;
+  }
+  ion-col button[clear] {
+    padding: 0;
+    height: 5rem;
+  }
+  ion-grid{
+    padding: 5px;
+  }
+  ion-grid > ion-row{
+    border-bottom: 1px solid #E5E5E5;
+  }
+  ion-grid > ion-row:last-child{
+    border-bottom: none;
+  }
+  .name{
+    font-size: 1.6rem;
+  }
+  .button-small{
+    padding:0;
+  }
+}

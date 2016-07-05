@@ -1,0 +1,35 @@
+<ion-navbar *navbar>
+  <ion-title>Signature</ion-title>
+</ion-navbar>
+
+<ion-content class="getting-started sign-page">
+  <ion-item-divider>
+    <ion-row>
+      <ion-col>Thanks for your time. Please provide the student with your autographs for memory.</ion-col>
+    </ion-row>
+  </ion-item-divider>
+  <ion-item-group>
+    <div id="signature"></div>
+  </ion-item-group>
+  <div padding>
+    <ion-grid class="tips">
+      <ion-row center>
+        <ion-col text-center>
+          <ion-icon danger name="information-circle"></ion-icon> 
+          <span danger>This signature will not be used in any other occasions</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <button class="reset" hidden gray outline block (click)="resetSignature($event)"><span ashy>Reset</span></button>
+  </div>
+  <div padding-left padding-right>
+    <button primary block *ngIf="isMentor" (click)="openMentorPage($event)">
+      <span class="skip">Skip</span>
+      <span class="done" hidden>Complete</span>
+    </button>
+    <button primary block *ngIf="isHomestay" (click)="openHomestayPage($event)">
+      <span class="skip">Skip</span>
+      <span class="done" hidden>Complete</span>
+    </button>
+  </div>
+</ion-content>
