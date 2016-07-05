@@ -1,9 +1,11 @@
-<ion-navbar *navbar>
-  <ion-title>Team Members</ion-title>
-  <ion-buttons end>
-    <button (click)="logout()">Logout</button>
-  </ion-buttons>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Team Members</ion-title>
+    <ion-buttons end>
+      <button (click)="logout()">Logout</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 
 <ion-content class="getting-started mentor-page">
@@ -77,8 +79,8 @@
     <ion-grid>
       <ion-row center>
         <ion-col width-50>
-            <ion-row><span>Group Feedback</span></ion-row>
-            <ion-row *ngIf="group.status"><span primary>Evaluated</span></ion-row>
+          <ion-row><span>Group Feedback</span></ion-row>
+          <ion-row *ngIf="group.status"><span primary>Evaluated</span></ion-row>
         </ion-col>
         <ion-col width-25>
         </ion-col>

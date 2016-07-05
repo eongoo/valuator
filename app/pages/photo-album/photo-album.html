@@ -1,6 +1,8 @@
-<ion-navbar *navbar>
-  <ion-title>Photos</ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Photos</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="photo-album upload-photo getting-started">
   <ion-row padding>
@@ -25,9 +27,9 @@
     </ion-col>
   </ion-row>
   <ion-item-group>
-      <ion-item>
-        <ion-textarea #input [(ngModel)]="guest.pics_comment" placeholder="Please describe these moments" (keyup)="handleInput(input)" (enter)="handleInput(input)" (blur)="handleInput(input)"></ion-textarea>
-      </ion-item>
+    <ion-item>
+      <ion-textarea #input [(ngModel)]="guest.pics_comment" placeholder="Please describe these moments" (keyup)="handleInput(input)" (enter)="handleInput(input)" (blur)="handleInput(input)"></ion-textarea>
+    </ion-item>
   </ion-item-group>
   <div padding>
     <button primary block (click)="submitPhotoAlbum($event)" [disabled] = "!guest.pics.length || !guest.pics_comment">

@@ -1,12 +1,14 @@
-<ion-navbar *navbar>
-  <ion-title>Comments</ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Comments</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="getting-started guest-comment">
   <ion-item-group>
-      <ion-item>
-        <ion-textarea #input [(ngModel)]="guest.comment" placeholder="What are the student’s strengths? What does s/he need to work on?" (keyup)="handleInput(input)" (enter)="handleInput(input)" (blur)="handleInput(input)"></ion-textarea>
-      </ion-item>
+    <ion-item>
+      <ion-textarea #input [(ngModel)]="guest.comment" placeholder="What are the student’s strengths? What does s/he need to work on?" (keyup)="handleInput(input)" (enter)="handleInput(input)" (blur)="handleInput(input)"></ion-textarea>
+    </ion-item>
   </ion-item-group>
   <div padding>
     <button primary block (click)="openSignOrHomePage($event)" [disabled] = "!guest.pics.length || !guest.comment">

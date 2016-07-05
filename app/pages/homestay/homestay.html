@@ -1,9 +1,11 @@
-<ion-navbar *navbar>
-  <ion-title>Homestay</ion-title>
-  <ion-buttons end>
-    <button (click)="logout()">Logout</button>
-  </ion-buttons>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Homestay</ion-title>
+    <ion-buttons end>
+      <button (click)="logout()">Logout</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="getting-started homestay">
   <ion-item-divider primary *ngIf="group && !group.hasPic">
@@ -21,7 +23,7 @@
               <ion-avatar item-left *ngIf="!guest || !guest._id || !guest._id.photo || !guest._id.photo.length" [ngStyle]="{'background-image': 'url(./img/default.png)'}"></ion-avatar>
             </button>
           </div>
-          <ion-col *ngIf="guest._id" text-center class="name">{{guest._id.pinyin}}</ion-col>
+          <ion-col *ngIf="guest._id" text-center class="name">{{guest._id.pinyin}} &nbsp;&nbsp;{{guest._id.age}} <ion-icon *ngIf="guest._id.gender == 2" name="female" small></ion-icon><ion-icon *ngIf="guest._id.gender == 1" name="male" small></ion-icon></ion-col>
         </ion-row>
         <ion-row>
           <ion-col width-25>

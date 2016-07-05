@@ -20,11 +20,24 @@
     margin-left: calc(50% - 384px);
   }
 }
+.opaque {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.opaque .toolbar-background {
+  background-color: rgba(#f8f8f8, 0.55);
+}
 .toast-wrapper {
   background: rgba(164, 195, 100, 0.9); 
 }
 .item {
   background: transparent;
+}
+ion-icon[small] {
+  min-height: 1.0em;
+  font-size: 1.0em;
+  font-weight: bold;
 }
 .getting-started {
   textarea{

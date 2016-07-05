@@ -1,12 +1,14 @@
-<ion-navbar *navbar>
-  <ion-title>Group Feedback</ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Group Feedback</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="upload-photo getting-started">
   <ion-item-group>
-      <ion-item>
-        <ion-textarea #input [(ngModel)]="group.comment" placeholder="Please write down your feedback to the group" (keyup)="handleInput(input)" (enter)="handleInput(input)" (blur)="handleInput(input)"></ion-textarea>
-      </ion-item>
+    <ion-item>
+      <ion-textarea #input [(ngModel)]="group.comment" placeholder="Please write down your feedback to the group" (keyup)="handleInput(input)" (enter)="handleInput(input)" (blur)="handleInput(input)"></ion-textarea>
+    </ion-item>
   </ion-item-group>
   <ion-item-group>
     <ion-row padding>
