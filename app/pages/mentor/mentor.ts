@@ -43,7 +43,7 @@ export class MentorPage{
 
   openEvaluateDetailsPage(guest) {
     let isTheLastGuestToRate: boolean = false;
-    if((this.group.count.guest - this.group.count.absent - this.group.count.score == 1) && guest.status <= 0) {
+    if((this.group.count.guest - this.group.count.absent - this.group.count.score == 1) && guest.status == 0) {
       isTheLastGuestToRate = true;
     }
 

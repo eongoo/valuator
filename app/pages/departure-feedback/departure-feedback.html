@@ -32,7 +32,7 @@
             </button>
           </div>
           <div text-right *ngIf="score && score.data">
-            Arrival Feedback <ion-icon *ngFor="let star of ['1','2','3','4','5']" name="star" [attr.light]="score.data[model.name] < star ? '' : null" [attr.primary]="score.data[model.name] >= star ? '' : null"></ion-icon>
+            <span class="grey">Arrival Feedback </span><ion-icon *ngFor="let star of ['1','2','3','4','5']" name="star" [attr.light]="score.data[model.name] < star ? '' : null" [attr.primary]="score.data[model.name] >= star ? '' : null"></ion-icon>
           </div>
         </ion-item>
       </ion-list>
