@@ -155,6 +155,14 @@ ion-icon[small] {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
+  ion-col .uploader-status ion-icon{
+    font-size:3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
   ion-col .uploader-status ion-spinner svg{
     width: 28px;
     height: 28px;

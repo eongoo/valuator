@@ -18,15 +18,21 @@ export class PhotoAlbumPage{
   maxWidth: number;
   maxCount: number;
   photoToBeDeleting: any;
+  hasPhotoIncomplete: boolean;
 
   constructor(private nav: NavController, public navParams:NavParams, public uploadService: UploadService) {
     this.guest = navParams.get('guest'); 
     this.group = navParams.get('group'); 
+    if(!this.guest.pics) {
+      this.guest.pics = [];
+    }
     this.allowTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
     this.maxSize = 10 * 1024 * 1024;
     this.maxWidth = 1280;
     this.maxCount = 100;
     this.photoToBeDeleting = [];
+    this.hasPhotoIncomplete = true;
+    this.doesAllPhotoCompleted();
   }
 
   ionViewDidLeave() {
@@ -36,6 +42,7 @@ export class PhotoAlbumPage{
   addPhoto(input) {
     var reader = [];  // create empt array for readers
     for (var i = 0; i < input.files.length; i++) {
+      this.hasPhotoIncomplete = true;
       reader.push(new FileReader());
 
       if (this.allowTypes.indexOf(input.files[i].type) === -1) {
@@ -83,6 +90,7 @@ export class PhotoAlbumPage{
           handler: () => {
             this.photoToBeDeleting.push(this.guest.pics[index]);
             this.guest.pics.splice(index, 1);
+            this.doesAllPhotoCompleted();
             /*
             if(this.guest.pics[index].data) {
               this.guest.pics.splice(index, 1);
@@ -192,16 +200,42 @@ export class PhotoAlbumPage{
         let dataURL = canvas.toDataURL('image/jpeg', 0.8);
         let photo = {_id:'', data:'', path:dataURL};
         _self.guest.pics.push(photo);
-        _self.doUploadPhoto(dataURL, photo);
+        _self.doUploadPhoto(photo);
       }
     });
   }
 
-  doUploadPhoto(dataURL, photo) {
-    this.uploadService.uploadImages(dataURL)
+  reUploadPhoto(index) {
+    let photo = this.guest.pics[index]; 
+    photo.err = false;
+    this.hasPhotoIncomplete = true;
+    this.doUploadPhoto(photo);
+  }
+
+  doesAllPhotoCompleted() {
+    let photoCount = this.guest.pics.length;
+    this.guest.pics.forEach((photo) =>{
+      if(photo._id || photo.err) {
+          photoCount -= 1;
+      } 
+    }); 
+    if(photoCount == 0) {
+      this.hasPhotoIncomplete = false;
+    }
+  }
+
+  doUploadPhoto(photo) {
+    this.uploadService.uploadImages(photo.path)
     .then(data =>{
+      this.response = data;
+      if(this.response.url) {
         photo.data = data;
         photo._id = photo.data.url.replace(/[^\d]/g,'');
+        photo.err = false;
+      } else {
+        photo.err = true;
+      }
+      this.doesAllPhotoCompleted();
     });
   }
 

@@ -8,7 +8,8 @@
   <ion-row padding>
     <ion-col width-33 *ngFor="let photo of guest.pics; let i = index">
       <div class="photo" [ngClass]="photo._id ? '' : 'uploader-status'"  [ngStyle]="{'background-image': 'url(' + photo.path + ')'}">
-        <ion-spinner *ngIf="!photo._id" name="bubbles"></ion-spinner>
+        <ion-spinner *ngIf="!photo._id && !photo.err" name="bubbles"></ion-spinner>
+        <ion-icon *ngIf="photo.err" name="alert" danger (click)="reUploadPhoto(i)"></ion-icon>
       </div>
       <button clear danger (click)="removePhoto(i)">
         <ion-icon name="close-circle"></ion-icon>
@@ -32,7 +33,7 @@
     </ion-item>
   </ion-item-group>
   <div padding>
-    <button primary block (click)="submitPhotoAlbum($event)" [disabled] = "!guest.pics.length || !guest.pics_comment">
+    <button primary block (click)="submitPhotoAlbum($event)" [disabled] = "!guest.pics.length || !guest.pics_comment || hasPhotoIncomplete">
       <span *ngIf="guest.step == 5">Complete</span>
       <span *ngIf="guest.step != 5">Next</span>
     </button>
